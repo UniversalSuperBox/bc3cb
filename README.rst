@@ -16,8 +16,10 @@ It provides a low barrier to entry:
 Features
 --------
 
-- Be awesome
-- Make things faster
+- Some Assembly Required: bc3cb doesn't handle HTTPS or proxying. Use what 
+  **you** want for that.
+- Complete Flexibility: Import whatever. Do whatever. Your mind is the limit 
+  to the behavior you can create
 
 
 Contribute
@@ -37,7 +39,9 @@ The project is licensed under the Apache-2.0 license.
 
 
 Less brevity below
-------------------
+==================
+
+This will be moved to the documentation in short order.
 
 
 A super simple framework for Basecamp 3 interactive chat bots, written in Python3.
