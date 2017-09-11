@@ -1,7 +1,5 @@
 import flask
-from flask import Flask
-from flask import request
-from flask import abort
+from flask import Flask, request, abort
 import multiprocessing
 from multiprocessing import Process
 from . import core
