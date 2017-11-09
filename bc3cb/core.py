@@ -10,10 +10,7 @@ from . import respond
 def commandworker(request):
     """Called by the Flask app when a command comes in. Glues together the behavior of bc3cb.
     
-    Arguments
-    ---------
-    
-    request(dict): The blob of json that Basecamp POSTS to the webapp."""
+    :param request: The blob of json that Basecamp POSTS to the webapp, parsed into a dictionary"""
     
     commandinfo = request
     commandline = shlex.split(commandinfo['command'])
@@ -46,7 +43,7 @@ def commandworker(request):
 def executeuserfunction(func, commandline, post_json_blob):
     """Runs the bot user's specified command if it exists"""
     try:
-        functiontoexecute = getattr(usercommands, func)
+        functiontoexecute = getattr(usercommands, func.lower())
     except AttributeError:
         raise Exception('BC3CBCommandNotFound', 'Command not found. Maybe try "help"?')
     else:

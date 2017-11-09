@@ -3,6 +3,7 @@ from flask import Flask, request, abort
 import multiprocessing
 from multiprocessing import Process
 from . import core
+import uuid
 
 receiver = Flask(__name__)
 
