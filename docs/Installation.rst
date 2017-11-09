@@ -31,3 +31,14 @@ Now all you'll need to do is run ``run.py`` and your bot will be ready to rock!.
 
 TODO: Setting up nginx for reverse proxying
 TODO: Automatic start
+
+Good proxy configuration, if you have a proxy in front::
+
+    server {
+        listen 80
+        server_name [DOMAIN]
+        root /var/www/default
+        location / {
+                proxy_pass http://localhost:5000/;
+        }
+    }

@@ -1,11 +1,6 @@
 Internals
 *********
 
-Core
-----
-
-Core is the 
-
 Internal Errors
 ---------------
 
@@ -15,7 +10,7 @@ Internal errors are thrown back and forth inside of bc3cb. While it's valid for 
 
 More will be added when the need arises.
 
-bc3cbCommNotFound
+bc3cbCommandNotFound
 ^^^^^^^^^^^^^^^^^
 
 Used when the bot user requests a command that hasn't been defined by the user. For example, they called the bot with `!bot weqyasdrvjklase`, but you don't have a `weqyasdrvjklase` function in `usercommands.py`.
