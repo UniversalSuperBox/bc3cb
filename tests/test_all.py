@@ -41,3 +41,19 @@ def test_receiverIndex():
     """This is really just a sanity check"""
     from bc3cb import receiver
     assert receiver.index() == "You're not supposed to be here!"
+
+
+# Add this to our test object for tests above
+''' def testcommand(commandline, commandinfo):
+    """
+    Usage: !bot testcommand some stuff
+
+    A command used for testing. Returns some of the info you send, formatted as a string
+    """
+
+    try:
+        __t = commandline[1]
+    except IndexError:
+        return 'This command requires at least one argument'
+    else:
+        return '|'.join([commandline[1], commandinfo['command'], commandinfo['creator']['name']]) '''

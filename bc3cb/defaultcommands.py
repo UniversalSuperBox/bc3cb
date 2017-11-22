@@ -1,4 +1,4 @@
-""" A chatbot base that makes it super easy to interface with Basecamp Campfires """
+"""Default commands for BC3CB."""
 
 '''
 Copyright 2017 Dalton Durst
@@ -16,5 +16,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+def ping(commandline, commandinfo):
+    """
+    Usage: !bot ping
+    Returns 'pong'.
+    """
 
-__all__ = ['log', 'core']
+    return '<b>pong</b>'
