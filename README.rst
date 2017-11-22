@@ -6,7 +6,7 @@ bc3cb makes it easy to create your own chatbot for Basecamp 3.
 It provides a low barrier to entry:
 
 #. ``git clone git@github.com:UniversalSuperBox/bc3cb.git``
-#. ``pip install flask requests``
+#. ``pip install bottle requests``
 #. Put your behavior in usercommands.py
 #. Set up a reverse proxy that provides HTTPS (nginx and Let's Encrypt make it 
    easy)

@@ -16,12 +16,13 @@ limitations under the License.
 
 import logging
 from logging.config import fileConfig
-from multiprocessing import Process
+from threading import Thread
 import os
 import configparser
 import bc3cb
 from bc3cb import core
-from flask import Flask, request, abort
+import bottle
+from bottle import request, run
 
 if os.path.isfile('bc3cb.ini'):
     logging.config.fileConfig('bc3cb.ini', disable_existing_loggers=False)
@@ -29,30 +30,37 @@ if os.path.isfile('bc3cb.ini'):
 
 MY_BOT = bc3cb.core.basecampbot(logger)
 
-RECEIVER = Flask(__name__)
+@MY_BOT.command("testcommand")
+def testcommand(commandline, commandinfo):
+    """
+    Usage: !bot testcommand some stuff
 
-@RECEIVER.route('/')
-def index():
-    """Helps to test that bc3cb is running"""
+    A command used for testing. Returns some of the info you send, formatted as a string
+    """
 
-    return "You're not supposed to be here!"
+    try:
+        __t = commandline[1]
+    except IndexError:
+        return 'This command requires at least one argument'
+    else:
+        return '|'.join([commandline[1], commandinfo['command'], commandinfo['creator']['name']])
 
-@RECEIVER.route('/basecamp3receiver', methods=['POST'])
+
+#Set up receiver
+
+@bottle.post('/basecamp3receiver')
 def call_core():
     """The receiver function that kicks off the rest of bc3cb"""
 
-    if not request.json or not 'command' in request.json:
-        abort(400)
+    if not request.json:
+        return bottle.HTTPResponse(status=400, body="Missing command")
 
-    requestdata = request.get_json()
+    requestdata = request.json
 
-    #TODO: Add multiprocessing back
-    # worker = Process(target=MY_BOT.commandworker, args=(requestdata,))
-    # worker.start()
+    bot_thread = Thread(target=MY_BOT.commandworker, args=(requestdata,))
+    bot_thread.start()
 
-    MY_BOT.commandworker(requestdata)
-
-    return "", 204
+    return bottle.HTTPResponse(status=204)
 
 if __name__ == '__main__':
-    RECEIVER.run(debug=False)
+    run(debug=False)

@@ -24,6 +24,20 @@ class basecampbot:
 
     def __init__(self, logger):
         self.__logger__ = logger
+        self.commands = {}
+
+    def command(self, command_string):
+        """ Decorator that adds a command to this bot.
+
+        :param command_string: Callable name of command. When a bot user types this, they call
+                               the function it decorates.
+        """
+
+        def decorator(f):
+            self.commands[command_string] = f
+            return f
+
+        return decorator
 
     def commandworker(self, request):
         """Called by the Flask app when a command comes in. Glues together the behavior of bc3cb.
@@ -65,8 +79,13 @@ class basecampbot:
     def executeuserfunction(self, func, commandline, post_json_blob):
         """Runs the bot user's specified command if it exists"""
 
+        # Try to find command in the commands dictionary
+        if func in self.commands:
+            return self.commands[func](commandline, post_json_blob)
+
+        # Try to find command in defaultcommands
         try:
-            functiontoexecute = getattr(usercommands, func.lower())
+            functiontoexecute = getattr(defaultcommands, func.lower())
         except AttributeError:
             raise Exception('BC3CBCommandNotFound', 'Command not found. Maybe try "help"?')
         else:

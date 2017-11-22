@@ -35,7 +35,8 @@ def test_coreExecuteuserfunction():
     commandinfo = test_data.testdata
     testdata_commandline = shlex.split(commandinfo['command'])
 
-    assert bc3cb.core.executeuserfunction('testcommand', testdata_commandline, commandinfo) == 'testargument|testcommand testargument|Test User'
+    assert bc3cb.core.executeuserfunction('testcommand', testdata_commandline, commandinfo) == 
+                                          'testargument|testcommand testargument|Test User'
 
 def test_receiverIndex():
     """This is really just a sanity check"""
@@ -43,7 +44,7 @@ def test_receiverIndex():
     assert receiver.index() == "You're not supposed to be here!"
 
 
-# Add this to our test object for tests above
+#TODO: Add this to our test object for tests above
 ''' def testcommand(commandline, commandinfo):
     """
     Usage: !bot testcommand some stuff
