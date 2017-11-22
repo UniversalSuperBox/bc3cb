@@ -17,7 +17,6 @@ limitations under the License.
 '''
 
 import shlex
-from . import defaultcommands
 import requests
 
 class basecampbot:
@@ -82,14 +81,8 @@ class basecampbot:
         # Try to find command in the commands dictionary
         if func in self.commands:
             return self.commands[func](commandline, post_json_blob)
-
-        # Try to find command in defaultcommands
-        try:
-            functiontoexecute = getattr(defaultcommands, func.lower())
-        except AttributeError:
-            raise Exception('BC3CBCommandNotFound', 'Command not found. Maybe try "help"?')
         else:
-            return functiontoexecute(commandline, post_json_blob)
+            raise Exception('BC3CBCommandNotFound', 'Command not found. Maybe try "help"?')
 
     def respond(self, response, callback_url):
         """POSTs our response back to Basecamp.

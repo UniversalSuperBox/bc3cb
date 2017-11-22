@@ -30,6 +30,8 @@ if os.path.isfile('bc3cb.ini'):
 
 MY_BOT = bc3cb.core.basecampbot(logger)
 
+# Add commands here
+
 @MY_BOT.command("testcommand")
 def testcommand(commandline, commandinfo):
     """
@@ -44,6 +46,15 @@ def testcommand(commandline, commandinfo):
         return 'This command requires at least one argument'
     else:
         return '|'.join([commandline[1], commandinfo['command'], commandinfo['creator']['name']])
+
+@MY_BOT.command("ping")
+def ping(commandline, commandinfo):
+    """
+    Usage: !bot ping
+    Returns 'pong'.
+    """
+
+    return '<b>pong</b>'
 
 
 #Set up receiver
