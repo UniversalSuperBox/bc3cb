@@ -57,7 +57,7 @@ class basecampbot:
                                             'with the command:', user_command]))
             errordescription = ' '.join(["⚠️Error: Please check the format of your command.",
                                          error.args[0]])
-            self.respond(finalresponse, commandinfo['callback_url'])
+            self.respond(errordescription, commandinfo['callback_url'])
             return
 
         userfunc_torun = commandline[0]
